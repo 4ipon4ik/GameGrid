@@ -1,16 +1,14 @@
+<?php
+require_once("./classes/autoload.php");
+$main = new Main_class();
+$template = new Template_class();
+$db = new DB_class();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Galvenā</title>
-    <!--js files-->
-    <script src="./libs/jquery/jquery-3.2.1.min.js"></script>
-    <script src="./libs/bootstrap3/js/bootstrap.min.js"></script>
-    <script src="./libs/fontawesome/js/fontawesome-all.min.js"></script>
-    <!--css files-->
-    <link rel="stylesheet" href="./libs/bootstrap3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/main.min.css">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="./images/favicon-gamepad.ico"/>
+    <?php Template_class::getLibs(); ?>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">

@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Galvenā</title>
     <?php Template_class::getLibs(); ?>
 </head>

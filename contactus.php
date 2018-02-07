@@ -1,16 +1,14 @@
+<?php
+require_once("./classes/autoload.php");
+$main = new Main_class();
+$template = new Template_class();
+$db = new DB_class();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Saziņa</title>
-    <!--js files-->
-    <script src="./libs/jquery/jquery-3.2.1.min.js"></script>
-    <script src="./libs/bootstrap3/js/bootstrap.min.js"></script>
-    <script src="./libs/fontawesome/js/fontawesome-all.min.js"></script>
-    <!--css files-->
-    <link rel="stylesheet" href="./libs/bootstrap3/css/bootstrap.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="./images/favicon-gamepad.ico"/>
+    <?php Template_class::getLibs(); ?>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -58,10 +56,10 @@
             <p><a href="contactus.php">Saziņa</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <form action="#">
+            <form action="contactus.php" method="post">
                 <div class="form-group">
                     <label for="usr">Vārds:</label>
-                    <input type="text" class="form-control" id="usr" placeholder="Ievadi vārdu">
+                    <input type="text" class="form-control" id="usr" placeholder="Ievadi vārdu" name="name">
                 </div>
                 <div class="form-group">
                     <label for="email">E-pasts:</label>
@@ -69,11 +67,16 @@
                 </div>
                 <div class="form-group">
                     <label for="comment">Ziņojums:</label>
-                    <textarea class="form-control" rows="5" id="comment" placeholder="Man garšo banāni"></textarea>
+                    <textarea class="form-control" rows="5" id="comment" placeholder="Man garšo banāni" name="messege"></textarea>
                 </div>
-                <button type="submit" class="btn btn-default">Sūtīt</button>
+                <button type="submit" class="btn btn-default" name="save">Sūtīt</button>
             </form>
-
+            <?php
+            if(isset($_POST['save'])){
+                    $db->saveMess($_POST['name'],$_POST['email'],$_POST['messege']);
+                    echo "Dati  saglabāti";
+                }
+            ?>
         </div>
         <div class="col-sm-2">
             <div class="well">

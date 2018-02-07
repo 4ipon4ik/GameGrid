@@ -8,7 +8,8 @@
 class Template_class
 {
     static function getLibs(){
-        echo '<!--js files-->
+        echo '<meta charset="UTF-8">
+                <!--js files-->
                 <script src="./libs/jquery/jquery-3.2.1.min.js"></script>
                 <script src="./libs/bootstrap3/js/bootstrap.min.js"></script>
                 <script src="./libs/fontawesome/js/fontawesome-all.min.js"></script>
