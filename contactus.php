@@ -32,6 +32,7 @@ $db = new DB_class();
                     <li><a href="contacts.php">Kontakti</a></li>
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
+            <li><a href="registration.php">Reģistrācija</a></li>
             </li>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>
@@ -69,10 +70,10 @@ $db = new DB_class();
                     <label for="comment">Ziņojums:</label>
                     <textarea class="form-control" rows="5" id="comment" placeholder="Man garšo banāni" name="messege"></textarea>
                 </div>
-                <button type="submit" class="btn btn-default" name="save">Sūtīt</button>
+                <button type="submit" class="btn btn-default" name="send">Sūtīt</button>
             </form>
             <?php
-            if(isset($_POST['save'])){
+            if(isset($_POST['send'])){
                     $db->saveMess($_POST['name'],$_POST['email'],$_POST['messege']);
                     echo "Dati  saglabāti";
                 }

@@ -35,6 +35,7 @@ $db = new DB_class();
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
             </li>
+            <li><a href="registration.php">Reģistrācija</a></li>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
