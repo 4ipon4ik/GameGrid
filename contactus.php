@@ -1,8 +1,5 @@
 <?php
-require_once("./classes/autoload.php");
-$main = new Main_class();
-$template = new Template_class();
-$db = new DB_class();
+    require_once("./classes/autoload.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +30,6 @@ $db = new DB_class();
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
             <li><a href="registration.php">Reģistrācija</a></li>
-            </li>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">

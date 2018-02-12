@@ -6,9 +6,6 @@
  * Time: 15:51
  */
     require_once("./classes/autoload.php");
-//    $main = new Main_class();
-//    $template = new Template_class();
-//    $db = new DB_class();
 ?>
 <!DOCTYPE html>
 <html lang="en">

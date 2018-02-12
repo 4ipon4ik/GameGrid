@@ -1,6 +1,5 @@
 <?php
-require_once("./classes/autoload.php");
-
+    require_once("./classes/autoload.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +29,7 @@ require_once("./classes/autoload.php");
                     <li><a href="contacts.php">Kontakti</a></li>
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
-            <li><a href="registration.php">Reģistrācija</a></li>
+            <li class="active"><a href="registration.php">Reģistrācija</a></li>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
@@ -63,23 +62,20 @@ require_once("./classes/autoload.php");
             <div class="well">
                 <p>Reklāma</p>
             </div>
+            <a href="usrList.php">Lietotāji</a>
         </div>
     </div>
 </div>
-<footer class="container-fluid">
-    Artūrs Kirņickis EDP1 Inc. 2017-2018.gads
-</footer>
 <?php
 if(@$_POST['uID'] != ''){
-    $db->editUsr($_POST['fname'],$_POST['lname'],$_POST['mail'] , $_POST['uID']);
-   header("Refresh:0");
-
+    $db->editUsr($_POST['fname'], $_POST['lname'], $_POST['mail'], $_POST['uID']);
 }
 if(isset($_POST['deleteUser'])){
     $db->deleteUsr($_POST['delUserID']);
-    header("Refresh:0");
-
 }
 ?>
+<footer class="container-fluid">
+    Artūrs Kirņickis EDP1 Inc. 2017-2018.gads
+</footer>
 </body>
 </html>

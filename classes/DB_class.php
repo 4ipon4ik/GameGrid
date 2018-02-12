@@ -16,12 +16,12 @@ class DB_class{
     }
     function saveMess($Name, $Mail, $Messege){
         $sql = "INSERT INTO messeges(fname, email, messege) VALUES('{$Name}','{$Mail}','{$Messege}')";
-        $rs=$this->con->query($sql);
+        $this->con->query($sql);
         echo $sql;
     }
     function saveUsr($nick, $mail, $pass, $fname, $lname, $stm, $ctry, $cty, $bday){
         $sql = "INSERT INTO users(nickname, email, password, firstname, lastname, steamprofile, country, city, birthday) VALUES('{$nick}','{$mail}','{$pass}','{$fname}','{$lname}','{$stm}','{$ctry}','{$cty}','{$bday}')";
-        $rs=$this->con->query($sql);
+        $this->con->query($sql);
         echo $sql;
     }
     function listUsers(){
@@ -44,14 +44,16 @@ class DB_class{
             echo "<tr>
                     <td>{$i}.</td>
                     <td>{$row["firstname"]}</td>
-                    <td> {$row["lastname"]}</td>
-                    <td> {$row["email"]}</td>
-                    <td><a href='./editUser.php?user={$row['userID']}'>Labot</a></td>
+                    <td>{$row["lastname"]}</td>
+                    <td>{$row["email"]}</td>
                     <td>
-                      <form action='./usrList.php' method='post'>
-                        <input type='hidden' name='delUserID' value='{$row['userID']}'/>
-                        <button type='submit' class='btn btn-primary' name='deleteUser'>Dzēst</button>
-                      </form>
+                        <a href='./editUser.php?user={$row['userID']}'>Labot</a>
+                    </td>
+                    <td>
+                        <form action='./usrList.php' method='post'>
+                            <input type='hidden' name='delUserID' value='{$row['userID']}'/>
+                            <button type='submit' class='btn btn-primary' name='deleteUser'>Dzēst</button>
+                        </form>
                     </td>
                 </tr>";
         }
@@ -81,12 +83,12 @@ class DB_class{
     }
     function editUsr($fname, $lname, $mail, $ID){
         $sql = "UPDATE users set firstname = '{$fname}', lastname = '{$lname}', email = '{$mail}' WHERE  userID='{$ID}'";
-        $rs=$this->con->query($sql);
+        $this->con->query($sql);
         echo  $sql;
     }
     function deleteUsr($ID){
         $sql = "DELETE FROM users WHERE userID='{$ID}'";
-        $rs=$this->con->query($sql);
+        $this->con->query($sql);
         echo $sql;
     }
 }

@@ -6,9 +6,6 @@
  * Time: 10:21
  */
     require_once("./classes/autoload.php");
-    $main = new Main_class();
-    $template = new Template_class();
-    $db = new DB_class();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +25,7 @@
             <a class="navbar-brand" href="index.php"><img src="./images/logo.png" class="logo" alt=""></a>
         </div>
         <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
-            <li class="active"><a href="index.php">Galvenā</a></li>
+            <li><a href="index.php">Galvenā</a></li>
             <li><a href="games.php">Spēles</a></li>
             <li><a href="gallery.php">Galerija</a></li>
             <li><a href="prices.php">Cenas</a></li>
@@ -39,7 +36,7 @@
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
             </li>
-            <li><a href="registration.php">Reģistrācija</a></li>
+            <li class="active"><a href="registration.php">Reģistrācija</a></li>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
@@ -91,12 +88,12 @@
                         <input type="text" class="form-control" id="stm" name="stm">
                     </div>
                     <div class="form-group">
-                        <label for="ctry">Valsts:</label>
-                        <input type="text" class="form-control" id="ctry" name="ctry">
+                        <label for="cty">Pilsēta:</label>
+                        <input type="text" class="form-control" id="cty" name="cty">
                     </div>
                     <div class="form-group">
-                        <label for="cty">Pilsēta:</label>
-                        <select type="text" class="form-control" id="cty" name="cty">
+                        <label for="ctry">Valsts:</label>
+                        <select class="form-control" id="ctry" name="ctry">
                             <option value="Latvija">Latvija</option>
                             <option value="Krievija">Krievija</option>
                             <option value="ASV">ASV</option>
@@ -123,6 +120,7 @@
             <div class="well">
                 <p>Reklāma</p>
             </div>
+            <a href="usrList.php">Lietotāji</a>
         </div>
     </div>
 </div>
