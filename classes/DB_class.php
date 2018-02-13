@@ -60,6 +60,11 @@ class DB_class{
         echo "</table>";
     }
 
+    function gamePage(){
+        $sql = "SELECT * FROM games WHERE gameID=1";
+
+    }
+
     function editUsrForm($id){
         $sql = "SELECT userID, firstname, lastname, email FROM users WHERE userID = {$id}";
         $rs=$this->con->query($sql);

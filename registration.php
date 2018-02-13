@@ -26,7 +26,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
             <li><a href="index.php">Galvenā</a></li>
-            <li><a href="games.php">Spēles</a></li>
+            <li><a href="gamesList.php">Spēles</a></li>
             <li><a href="gallery.php">Galerija</a></li>
             <li><a href="prices.php">Cenas</a></li>
             <li class="dropdown">
@@ -107,7 +107,7 @@
                 </form>
                 <?php
                 if(isset($_POST['saveUsr'])){
-                    $db->saveUsr($_POST['email'],$_POST['pwd'],$_POST['nick'],$_POST['fname'],$_POST['lname'],$_POST['stm'],$_POST['ctry'],$_POST['cty'],$_POST['bthdy']);
+                    $db->saveUsr($_POST['nick'],$_POST['email'],$_POST['pwd'],$_POST['fname'],$_POST['lname'],$_POST['stm'],$_POST['cty'],$_POST['ctry'],$_POST['bthdy']);
                     echo "Dati  saglabāti";
                 }
                 ?>

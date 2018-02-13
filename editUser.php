@@ -25,8 +25,8 @@
             <a class="navbar-brand" href="index.php"><img src="./images/logo.png" class="logo" alt=""></a>
         </div>
         <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
-            <li class="active"><a href="index.php">Galvenā</a></li>
-            <li><a href="games.php">Spēles</a></li>
+            <li><a href="index.php">Galvenā</a></li>
+            <li><a href="gamesList.php">Spēles</a></li>
             <li><a href="gallery.php">Galerija</a></li>
             <li><a href="prices.php">Cenas</a></li>
             <li class="dropdown">
@@ -36,7 +36,7 @@
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
             </li>
-            <li><a href="registration.php">Reģistrācija</a></li>
+            <li class="active"><a href="registration.php">Reģistrācija</a></li>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
@@ -72,6 +72,7 @@
             <div class="well">
                 <p>Reklāma</p>
             </div>
+            <a href="usrList.php">Lietotāji</a>
         </div>
     </div>
 </div>
