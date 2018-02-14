@@ -53,7 +53,7 @@
             <p><a href="#">Video</a></p>
         </div>
         <div class="col-sm-8 text-left">
-
+            <?php $db->gamePage($_GET['$GameID]']) ?>
         </div>
         <div class="col-sm-2">
             <div class="well">

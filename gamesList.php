@@ -53,7 +53,7 @@
             <p><a href="#">Video</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <a href=""><img src="./pictures/games/Counter Strike.jpg" alt="Counter Strike GO" class="img-responsive col-md-4 col-lg-3 col-sm-6 img-thumbnail"></a>
+            <a href="./game.php?game=1"><img src="./pictures/games/Counter Strike.jpg" alt="Counter Strike GO" class="img-responsive col-md-4 col-lg-3 col-sm-6 img-thumbnail"></a>
             <img src="./pictures/games/Assassin's creed Origins.jpg" alt="Assassin's creed Origins" class="img-responsive col-md-4 col-lg-3 col-sm-6 img-thumbnail">
             <img src="./pictures/games/Call of Duty WWII.jpg" alt="Call of Duty WWII" class="img-responsive col-md-4 col-lg-3 col-sm-6 img-thumbnail">
             <img src="./pictures/games/Grand theft Auto V.jpg" alt="Grand theft Auto V" class="img-responsive col-md-4 col-lg-3 col-sm-6 img-thumbnail">
@@ -67,6 +67,11 @@
             <img src="./pictures/games/Spider-Man PS4.jpg" alt="Spider-Man PS4" class="img-responsive col-md-4 col-lg-3 col-sm-6 img-thumbnail">
             <img src="./pictures/games/The Last of US 2.jpg" alt="The Last of US 2" class="img-responsive col-md-4 col-lg-3 col-sm-6 img-thumbnail">
         </div>
+        <?php
+        if(@$_POST['game'] != ''){
+            $db->gamePage($_POST['game']);
+        }
+        ?>
         <div class="col-sm-2">
             <div class="well">
                 <p>Reklāma</p>
@@ -77,7 +82,6 @@
         </div>
     </div>
 </div>
-
 <footer class="container-fluid">
     Artūrs Kirņickis EDP1 Inc. 2017-2018.gads
 </footer>

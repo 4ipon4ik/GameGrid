@@ -60,9 +60,9 @@ class DB_class{
         echo "</table>";
     }
 
-    function gamePage(){
-        $sql = "SELECT * FROM games WHERE gameID=1";
-
+    function gamePage($id){
+        $sql = "SELECT games.*, commentaries.* FROM games, users  WHERE gameID={$id}";
+        $this->con->query($sql);
     }
 
     function editUsrForm($id){
