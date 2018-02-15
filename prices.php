@@ -73,7 +73,6 @@
         </div>
     </div>
 </div>
-
 <footer class="container-fluid">
     Artūrs Kirņickis EDP1 Inc. 2017-2018.gads
 </footer>

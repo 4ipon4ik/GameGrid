@@ -1,14 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: edp1
+ * Date: 15.02.2018
+ * Time: 13:41
+ */
     require_once("./classes/autoload.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>List</title>
+    <title>Galvenā</title>
     <?php Template_class::getLibs(); ?>
-    <?php if(isset($_SESSION['nick'])){
-        
-    } ?>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -32,11 +36,9 @@
                     <li><a href="contacts.php">Kontakti</a></li>
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
+            </li>
             <li class="active"><a href="registration.php">Reģistrācija</a></li>
             <li><a href="aboutus.php">Par Mums</a></li>
-            <li>
-                <?php $db->logOut(); ?>
-            </li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
             <div class="input-group">
@@ -52,14 +54,32 @@
 </nav>
 <div class="container-fluid text-center main">
     <div class="row content">
-        <div class="col-sm-2">
+        <div class="col-sm-2 sidenav">
+            <p><a href="#">Ziņas</a></p>
             <p><a href="#">Navi</a></p>
             <p><a href="#">Gācija</a></p>
-            <p><a href="contacts.php">Kontakti</a></p>
-            <p><a href="contactus.php">Saziņa</a></p>
+            <p><a href="#">Visādi jaukumi</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <?php $db->listUsers()?>
+            <h1>Ievadi reģistrācijas datus:</h1>
+            <div class="col-sm-6">
+                <form action="login.php" method="post">
+                    <div class="form-group">
+                        <label for="nick">Sauklis:</label>
+                        <input type="text" class="form-control" id="nick" name="nick">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Parole:</label>
+                        <input type="password" class="form-control" id="pwd" name="pwd">
+                    </div>
+                    <button type="submit" class="btn btn-default" name="logIn">Pieslēgties</button>
+                </form>
+                <?php
+                if(isset($_POST['logIn'])){
+                    $db->getUsr($_POST['nick'],md5($_POST['pwd']));
+                }
+                ?>
+            </div>
         </div>
         <div class="col-sm-2">
             <div class="well">
@@ -77,14 +97,6 @@
         </div>
     </div>
 </div>
-<?php
-if(@$_POST['uID'] != ''){
-    $db->editUsr($_POST['fname'], $_POST['lname'], $_POST['mail'], $_POST['uID']);
-}
-if(isset($_POST['deleteUser'])){
-    $db->deleteUsr($_POST['delUserID']);
-}
-?>
 <footer class="container-fluid">
     Artūrs Kirņickis EDP1 Inc. 2017-2018.gads
 </footer>

@@ -107,7 +107,7 @@
                 </form>
                 <?php
                 if(isset($_POST['saveUsr'])){
-                    $db->saveUsr($_POST['nick'],$_POST['email'],$_POST['pwd'],$_POST['fname'],$_POST['lname'],$_POST['stm'],$_POST['cty'],$_POST['ctry'],$_POST['bthdy']);
+                    $db->saveUsr($_POST['nick'],$_POST['email'],md5($_POST['pwd']),$_POST['fname'],$_POST['lname'],$_POST['stm'],$_POST['cty'],$_POST['ctry'],$_POST['bthdy']);
                     echo "Dati  saglabāti";
                 }
                 ?>
@@ -120,7 +120,12 @@
             <div class="well">
                 <p>Reklāma</p>
             </div>
-            <a href="usrList.php">Lietotāji</a>
+            <div>
+                <a href="usrList.php">Lietotāji</a>
+            </div>
+            <div>
+                <a href="login.php">Pieslēgties</a>
+            </div>
         </div>
     </div>
 </div>

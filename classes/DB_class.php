@@ -26,12 +26,13 @@ class DB_class{
     }
     function listUsers(){
         $i = 0;
-        $sql = "SELECT userID, firstname, lastname, email FROM users";
+        $sql = "SELECT userID, nickname, firstname, lastname, email FROM users";
         $rs=$this->con->query($sql);
         echo "<table class='table table-hover'>
                 <thead>
                     <tr>
                         <th>Nr.</th>
+                        <th>Sauklis</th>
                         <th>Vārds</th>
                         <th>Uzvārds</th>
                         <th>E-pasts</th>
@@ -43,6 +44,7 @@ class DB_class{
             $i++;
             echo "<tr>
                     <td>{$i}.</td>
+                    <td>{$row["nickname"]}</td>
                     <td>{$row["firstname"]}</td>
                     <td>{$row["lastname"]}</td>
                     <td>{$row["email"]}</td>
@@ -61,7 +63,7 @@ class DB_class{
     }
 
     function gamePage($id){
-        $sql = "SELECT games.*, commentaries.* FROM games, users  WHERE gameID={$id}";
+        $sql = "SELECT games.*, commentaries.* FROM games, commentaries  WHERE games.gameID={$id}";
         $this->con->query($sql);
     }
 
@@ -95,5 +97,32 @@ class DB_class{
         $sql = "DELETE FROM users WHERE userID='{$ID}'";
         $this->con->query($sql);
         echo $sql;
+    }
+    function getUsr($nick,$pwd){
+        $sql = "SELECT userID, nickname, password FROM users WHERE nickname='{$nick}' AND password='{$pwd}'";
+        $rs = $this->con->query($sql);
+        if($rs->num_rows!==0){
+            echo "Malacis";
+            session_start();
+            while($row = $rs->fetch_assoc()) {
+                $_SESSION['nick'] = $row['userID'];
+            }
+            header("location:usrList.php");
+        }
+        else{
+            echo "Nepareizs lietotājs vai parole";
+        }
+    }
+    function logOut(){
+        echo "<form action='' method='post'>
+                    <button type='submit' name='i' class='btn-danger'>Iziet</button>
+                </form>";
+        if(isset($_POST['i'])){
+            session_destroy();
+            $this->header('index.php');
+        }
+    }
+    function header($send){
+        header("location:{$send}");
     }
 }

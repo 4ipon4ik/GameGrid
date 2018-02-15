@@ -11,4 +11,4 @@
     $main = new Main_class();
     $template = new Template_class();
     $db = new DB_class();
-?>
+    session_start();

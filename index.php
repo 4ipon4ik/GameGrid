@@ -113,6 +113,9 @@
 				<div class="well">
 					<p>Reklāma</p>
 				</div>
+                <div>
+                    <a href="login.php">Pieslēgties</a>
+                </div>
 			</div>
 		</div>
 	</div>
