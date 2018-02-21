@@ -6,8 +6,8 @@
 <head>
     <title>List</title>
     <?php Template_class::getLibs(); ?>
-    <?php if(isset($_SESSION['nick'])){
-        
+    <?php if(!isset($_SESSION['nick'])){
+        header("location:index.php");
     } ?>
 </head>
 <body>
@@ -32,11 +32,17 @@
                     <li><a href="contacts.php">Kontakti</a></li>
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
-            <li class="active"><a href="registration.php">Reģistrācija</a></li>
-            <li><a href="aboutus.php">Par Mums</a></li>
-            <li>
-                <?php $db->logOut(); ?>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profils<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="registration.php">Reģistrēties</a></li>
+                    <li><a href="login.php">Pieslēgties</a></li>
+                </ul>
             </li>
+            <?php if(isset($_SESSION['nick'])){
+                echo '<li class="active"><a href="usrList.php">Lietotāji</a></li>';
+            } ?>
+            <li><a href="aboutus.php">Par Mums</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
             <div class="input-group">
@@ -67,12 +73,6 @@
             </div>
             <div class="well">
                 <p>Reklāma</p>
-            </div>
-            <div>
-                <a href="usrList.php">Lietotāji</a>
-            </div>
-            <div>
-                <a href="login.php">Pieslēgties</a>
             </div>
         </div>
     </div>

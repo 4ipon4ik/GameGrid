@@ -103,7 +103,6 @@ class DB_class{
         $rs = $this->con->query($sql);
         if($rs->num_rows!==0){
             echo "Malacis";
-            session_start();
             while($row = $rs->fetch_assoc()) {
                 $_SESSION['nick'] = $row['userID'];
             }

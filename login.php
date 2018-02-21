@@ -12,7 +12,6 @@
 <head>
     <title>Galvenā</title>
     <?php Template_class::getLibs(); ?>
-
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -37,8 +36,18 @@
                     <li><a href="contactus.php">Saziņa</a></li>
                 </ul>
             </li>
-            <li class="active"><a href="registration.php">Reģistrācija</a></li>
+            <li class="dropdown active">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profils<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="registration.php">Reģistrēties</a></li>
+                    <li><a href="login.php">Pieslēgties</a></li>
+                </ul>
+            </li>
+            <?php if(isset($_SESSION['nick'])){
+                echo '<li><a href="usrList.php">Lietotāji</a></li>';
+            } ?>
             <li><a href="aboutus.php">Par Mums</a></li>
+            <li><a href=""></a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
             <div class="input-group">
@@ -87,12 +96,6 @@
             </div>
             <div class="well">
                 <p>Reklāma</p>
-            </div>
-            <div>
-                <a href="usrList.php">Lietotāji</a>
-            </div>
-            <div>
-                <a href="login.php">Pieslēgties</a>
             </div>
         </div>
     </div>
