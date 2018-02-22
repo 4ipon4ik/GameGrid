@@ -28,7 +28,7 @@ class DB_class{
         $i = 0;
         $sql = "SELECT userID, nickname, firstname, lastname, email FROM users";
         $rs=$this->con->query($sql);
-        echo "<table class='table table-hover'>
+        echo "<table class='table table-hover table-bordered'>
                 <thead>
                     <tr>
                         <th>Nr.</th>
@@ -102,9 +102,9 @@ class DB_class{
         $sql = "SELECT userID, nickname, password FROM users WHERE nickname='{$nick}' AND password='{$pwd}'";
         $rs = $this->con->query($sql);
         if($rs->num_rows!==0){
-            echo "Malacis";
             while($row = $rs->fetch_assoc()) {
                 $_SESSION['nick'] = $row['userID'];
+                $_SESSION['username']=$row['nickname'];
             }
             header("location:usrList.php");
         }

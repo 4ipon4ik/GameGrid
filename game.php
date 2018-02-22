@@ -40,14 +40,13 @@
                 </li>';
             }
             else{
-                echo '<li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profils<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Profils</a></li>
-                        <li><a href="#">Iziet</a></li>
-                    </ul>
-                </li>
+                echo '<li><a href="#">'.$_SESSION['username'].'</a></li>
+                        <li><form action="" method="post"><button class="btn btn-primary" name="i">Iziet</button></form></li>
                         <li><a href="usrList.php">Lietotāji</a></li>';
+                if(isset($_POST['i'])){
+                    session_destroy();
+                    header('location:index.php');
+                }
             }?>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>

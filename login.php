@@ -11,7 +11,10 @@
 <html lang="en">
 <head>
     <title>Galvenā</title>
-    <?php Template_class::getLibs(); ?>
+    <?php Template_class::getLibs();
+        if(isset($_SESSION['nick'])){
+        header("location:index.php");
+    } ?>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -37,7 +40,7 @@
                 </ul>
             </li>
             <?php if(!isset($_SESSION['nick'])){
-                echo '<li class="dropdown active">
+                echo '<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profils<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="registration.php">Reģistrēties</a></li>
@@ -46,14 +49,13 @@
                 </li>';
             }
             else{
-                echo '<li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profils<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Profils</a></li>
-                        <li><a href="#">Iziet</a></li>
-                    </ul>
-                </li>
+                echo '<li><a href="#">'.$_SESSION['username'].'</a></li>
+                        <li><form action="" method="post"><button class="btn btn-primary" name="i">Iziet</button></form></li>
                         <li><a href="usrList.php">Lietotāji</a></li>';
+                if(isset($_POST['i'])){
+                    session_destroy();
+                    header('location:index.php');
+                }
             }?>
             <li><a href="aboutus.php">Par Mums</a></li>
         </ul>

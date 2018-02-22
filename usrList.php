@@ -5,8 +5,8 @@
 <html lang="en">
 <head>
     <title>List</title>
-    <?php Template_class::getLibs(); ?>
-    <?php if(!isset($_SESSION['nick'])){
+    <?php Template_class::getLibs();
+    if(!isset($_SESSION['nick'])){
         header("location:index.php");
     } ?>
 </head>
@@ -42,13 +42,8 @@
                 </li>';
                 }
                 else{
-                    echo '<li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profils<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Profils</a></li>
-                        <li><form action="" method="post"><button name="i">Iziet</button></form></li>
-                    </ul>
-                </li>
+                    echo '<li><a href="#">'.$_SESSION['username'].'</a></li>
+                        <li><form action="" method="post"><button class="btn btn-primary" name="i">Iziet</button></form></li>
                         <li class="active"><a href="usrList.php">Lietotāji</a></li>';
                     if(isset($_POST['i'])){
                         session_destroy();
