@@ -19,36 +19,38 @@
             <a class="navbar-brand" href="index.php"><img src="./images/logo.png" class="logo" alt=""></a>
         </div>
         <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
-            <li><a href="index.php">Galvenā</a></li>
-            <li><a href="gamesList.php">Spēles</a></li>
-            <li><a href="gallery.php">Galerija</a></li>
-            <li><a href="prices.php">Cenas</a></li>
-            <li class="dropdown active">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kontakti<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="contacts.php">Kontakti</a></li>
-                    <li><a href="contactus.php">Saziņa</a></li>
-                </ul>
-            </li>
+            <li><a href="./index.php">Galvenā</a></li>
+            <li><a href="./gamesList.php">Spēles</a></li>
+            <li><a href="./gallery.php">Galerija</a></li>
+            <li><a href="./prices.php">Cenas</a></li>
             <?php if(!isset($_SESSION['nick'])){
                 echo '<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profils<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="registration.php">Reģistrēties</a></li>
-                        <li><a href="login.php">Pieslēgties</a></li>
+                        <li><a href="./registration.php">Reģistrēties</a></li>
+                        <li><a href="./login.php">Pieslēgties</a></li>
                     </ul>
                 </li>';
             }
             else{
-                echo '<li><a href="#">'.$_SESSION['username'].'</a></li>
-                        <li><form action="" method="post"><button class="btn btn-primary" name="i">Iziet</button></form></li>
-                        <li><a href="usrList.php">Lietotāji</a></li>';
+                echo '<li><a href="./profile.php">'.$_SESSION['username'].'</a></li>
+                        <li><form method="post"><button class="btn btn-primary" name="i">Iziet</button></form></li>';
                 if(isset($_POST['i'])){
                     session_destroy();
                     header('location:index.php');
                 }
+                if($_SESSION['role']==4){
+                    echo '<li><a href="./usrList.php">Lietotāji</a></li>';
+                }
             }?>
-            <li><a href="aboutus.php">Par Mums</a></li>
+            <li class="dropdown active">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Kontakti<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="./contacts.php">Kontakti</a></li>
+                    <li><a href="./contactus.php">Saziņa</a></li>
+                </ul>
+            </li>
+            <li><a href="./aboutus.php">Par Mums</a></li>
         </ul>
         <form class="navbar-form navbar-right" action="#">
             <div class="input-group">

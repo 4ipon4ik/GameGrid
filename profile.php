@@ -1,12 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: artur
+ * Date: 25.02.2018
+ * Time: 20:14
+ */
     require_once("./classes/autoload.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>List</title>
+    <title>Profile</title>
     <?php Template_class::getLibs();
-    if(!($_SESSION['role']==4)){
+    if(!isset($_SESSION['nick'])){
         header("location:login.php");
     } ?>
 </head>
@@ -19,7 +25,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php"><img src="./images/logo.png" class="logo" alt=""></a>
+            <a class="navbar-brand" href="./index.php"><img src="./images/logo.png" class="logo" alt=""></a>
         </div>
         <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
             <li><a href="./index.php">Galvenā</a></li>
@@ -36,12 +42,14 @@
             </li>';
             }
             else{
-                echo '<li><a href="./profile.php">'.$_SESSION['username'].'</a></li>
-                    <li><form method="post"><button class="btn btn-primary" name="i">Iziet</button></form></li>
-                    <li class="active"><a href="./usrList.php">Lietotāji</a></li>';
+                echo '<li class="active"><a href="./profile.php">'.$_SESSION['username'].'</a></li>
+                    <li><form method="post"><button class="btn btn-primary" name="i">Iziet</button></form></li>';
                 if(isset($_POST['i'])){
                     session_destroy();
                     header('location:index.php');
+                }
+                if($_SESSION['role']==4){
+                    echo '<li><a href="./usrList.php">Lietotāji</a></li>';
                 }
             }?>
             <li class="dropdown">
@@ -67,33 +75,25 @@
 </nav>
 <div class="container-fluid text-center main">
     <div class="row content">
-        <div class="col-sm-2">
+        <aside class="col-sm-2">
             <p><a href="#">Navi</a></p>
             <p><a href="#">Gācija</a></p>
-            <p><a href="contacts.php">Kontakti</a></p>
-            <p><a href="contactus.php">Saziņa</a></p>
+            <p><a href="./contacts.php">Kontakti</a></p>
+            <p><a href="./contactus.php">Saziņa</a></p>
+        </aside>
+        <div class="col-sm-8 text-right">
+            <?php $db->getProfile($_SESSION['nick'])?>
         </div>
-        <div class="col-sm-8 text-left">
-            <?php $db->listUsers()?>
-        </div>
-        <div class="col-sm-2">
+        <aside class="col-sm-2">
             <div class="well">
                 <p>Reklāma</p>
             </div>
             <div class="well">
                 <p>Reklāma</p>
             </div>
-        </div>
+        </aside>
     </div>
 </div>
-<?php
-if(@$_POST['uID'] != ''){
-    $db->editUsr($_POST['fname'], $_POST['lname'], $_POST['mail'], $_POST['uID']);
-}
-if(isset($_POST['deleteUser'])){
-    $db->deleteUsr($_POST['delUserID']);
-}
-?>
 <footer class="container-fluid">
     Artūrs Kirņickis EDP1 Inc. 2017-2018.gads
 </footer>

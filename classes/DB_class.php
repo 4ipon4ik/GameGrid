@@ -91,20 +91,20 @@ class DB_class{
     function editUsr($fname, $lname, $mail, $ID){
         $sql = "UPDATE users set firstname = '{$fname}', lastname = '{$lname}', email = '{$mail}' WHERE  userID='{$ID}'";
         $this->con->query($sql);
-        echo  $sql;
     }
     function deleteUsr($ID){
         $sql = "DELETE FROM users WHERE userID='{$ID}'";
         $this->con->query($sql);
-        echo $sql;
     }
     function getUsr($nick,$pwd){
-        $sql = "SELECT userID, nickname, password FROM users WHERE nickname='{$nick}' AND password='{$pwd}'";
+        $sql = "SELECT u.userID, u.nickname, u.password, r.roleID, p.rolename FROM users u INNER JOIN roles r ON u.userID = r.userID INNER JOIN permissions p ON r.roleID = p.roleID WHERE nickname='{$nick}' AND password='{$pwd}'";
         $rs = $this->con->query($sql);
         if($rs->num_rows!==0){
             while($row = $rs->fetch_assoc()) {
                 $_SESSION['nick'] = $row['userID'];
                 $_SESSION['username']=$row['nickname'];
+                $_SESSION['role']=$row['roleID'];
+                $_SESSION['rolename']=$row['rolename'];
             }
             header("location:usrList.php");
         }
@@ -123,5 +123,23 @@ class DB_class{
     }
     function header($send){
         header("location:{$send}");
+    }
+    function getProfile($userID){
+        $sql = "SELECT * FROM users WHERE userID = {$userID}";
+        $rs=$this->con->query($sql);
+        while($row = $rs->fetch_assoc()) {
+            echo "<h1>Sveiks {$row['nickname']}!<h1/>
+                    <div>
+                    <p>Vārds: {$row['firstname']}</p>
+                    <p>Uzvārds: {$row['lastname']}</p>
+                    <p>e-pasts: {$row['email']}</p>
+                    <p>Steam profils: {$row['steamprofile']}</p>
+                    <p>Valsts: {$row['country']}</p>
+                    <p>Pilsēta: {$row['city']}</p>
+                    <p>Dzimšanas diena: {$row['birthday']}</p>
+                    <p>Tiesības: {$_SESSION['rolename']}</p>
+                  </div>
+                  ";
+        }
     }
 }
