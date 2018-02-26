@@ -7,7 +7,7 @@ html {
   min-height: 100%; }
 
 body {
-  background-color: rgba(12, 11, 217, 0.47); }
+  background-color: rgba(136, 144, 217, 0.47); }
 
 li {
   list-style-type: none; }
@@ -19,12 +19,13 @@ li {
   max-height: 30px; }
 
 .navbar-inverse {
-  background-color: #8569c0;
+  background-color: #bec06d;
   border: 0; }
-  .navbar-inverse.navbar-nav > li > a {
-    color: #210a07; }
-    .navbar-inverse.navbar-nav > li > a:hover {
-      color: rgba(180, 175, 80, 0.96); }
+  .navbar-inverse .navbar-nav > li > a {
+    color: #4e7f7e;
+    font-weight: bold; }
+    .navbar-inverse .navbar-nav > li > a:hover {
+      color: rgba(180, 81, 63, 0.96); }
 
 iframe {
   width: 100%; }
@@ -34,6 +35,6 @@ footer {
   text-align: center;
   position: static;
   bottom: 0;
-  background-color: #707070; }
+  background-color: rgba(112, 31, 56, 0.25); }
 
 /*# sourceMappingURL=main.css.map */

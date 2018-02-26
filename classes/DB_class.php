@@ -63,8 +63,22 @@ class DB_class{
     }
 
     function gamePage($id){
-        $sql = "SELECT games.*, commentaries.* FROM games, commentaries  WHERE games.gameID={$id}";
-        $this->con->query($sql);
+        $sql = "SELECT * FROM games  WHERE gameID={$id}";
+        $sql2 = "SELECT c.comdate, c.content, u.nickname FROM commentaries c INNER JOIN users u ON c.userID = u.userID WHERE c.gameID={$id}";
+        $rs = $this->con->query($sql);
+        $rs2 = $this->con->query($sql2);
+        while($row = $rs->fetch_assoc()) {
+            echo "<h1>{$row['gname']}<h1/>
+                  <p>{$row['description']}<p/>
+                  <p>{$row['rating']}<p/>
+                  <p>{$row['releasedate']}<p/>
+                  <p>{$row['platform']}<p/>";
+        }
+        while($row = $rs2->fetch_assoc()) {
+            echo "<p>{$row['nickname']}<p/>
+                  <p>{$row['comdate']}<p/>
+                  <p>{$row['content']}<p/>";
+        }
     }
 
     function editUsrForm($id){
@@ -73,16 +87,16 @@ class DB_class{
         while($row = $rs->fetch_assoc()) {
             echo "
                     <div class='form-group'>
-                        <label for='category_name'>Vārds:</label>
-                        <input type='text' name='fname' value='{$row['firstname']}'  class='form-control'/>
+                        <label for='1'>Vārds:</label>
+                        <input id='1' type='text' name='fname' value='{$row['firstname']}'  class='form-control'/>
                     </div>
                     <div class='form-group'>
-                        <label for='short_name'>Uzvārds:</label>
-                        <input type='text' name='lname' value='{$row['lastname']}'  class='form-control'/>
+                        <label for='2'>Uzvārds:</label>
+                        <input id='2' type='text' name='lname' value='{$row['lastname']}'  class='form-control'/>
                     </div>
                     <div class='form-group'>
-                        <label for='short_name'>E-pasts:</label>
-                        <input type='email' name='mail' value='{$row['email']}'  class='form-control'/>
+                        <label for='3'>E-pasts:</label>
+                        <input id='3' type='email' name='mail' value='{$row['email']}'  class='form-control'/>
                     </div>
                     <input type='hidden' name='uID' value='{$row['userID']}'/>
                 ";

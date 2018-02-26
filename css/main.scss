@@ -14,11 +14,12 @@ li{
 .logo{
   max-height: $LogoMaxH;
 }
-.navbar-inverse {
+.navbar-inverse{
   background-color: $NavBarC;
   border: $NavBarBrSz;
-  &.navbar-nav > li > a {
+  & .navbar-nav > li > a {
     color: $NavTxtC;
+    font-weight: bold;
     &:hover {
       color: $NavTxtCHov;
     }
