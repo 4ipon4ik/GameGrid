@@ -35,3 +35,9 @@ footer{
   bottom: $FtrPosBottom;
   background-color: $FtrC;
 }
+.table .comment{
+  background-color: rgba(136,144,217,0.25);
+  &>th{
+    width: 50%;
+  }
+}

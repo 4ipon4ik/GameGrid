@@ -60,6 +60,7 @@ class DB_class{
                 </tr>";
         }
         echo "</table>";
+        var_dump($rs);
     }
 
     function gamePage($id){
@@ -68,16 +69,26 @@ class DB_class{
         $rs = $this->con->query($sql);
         $rs2 = $this->con->query($sql2);
         while($row = $rs->fetch_assoc()) {
-            echo "<h1>{$row['gname']}<h1/>
-                  <p>{$row['description']}<p/>
-                  <p>{$row['rating']}<p/>
-                  <p>{$row['releasedate']}<p/>
-                  <p>{$row['platform']}<p/>";
+            echo "<div class='col-sm-12'>
+                      <h1 class='text-center'>{$row['gname']}</h1>
+                      <div class='col-sm-6'>
+                        
+                      </div>
+                      <div class='col-sm-6 text-left'>
+                      <table class='table'>
+                          <td>{$row['description']}</td>
+                          <td>{$row['rating']}</td>
+                          <td>{$row['releasedate']}</td>
+                          <td>{$row['platform']}</td>
+                      </table>
+                      </div>
+                  </div>";
         }
         while($row = $rs2->fetch_assoc()) {
-            echo "<p>{$row['nickname']}<p/>
-                  <p>{$row['comdate']}<p/>
-                  <p>{$row['content']}<p/>";
+            echo "<table class='table table-bordered comment'>
+                      <head><th>{$row['nickname']}</th><th class='text-right'>{$row['comdate']}</th></head>
+                      <tr><td colspan='2'>{$row['content']}</td></tr>
+                  </table>";
         }
     }
 
@@ -142,8 +153,11 @@ class DB_class{
         $sql = "SELECT * FROM users WHERE userID = {$userID}";
         $rs=$this->con->query($sql);
         while($row = $rs->fetch_assoc()) {
-            echo "<h1>Sveiks {$row['nickname']}!<h1/>
-                    <div>
+            echo "<h1>Sveiks {$row['nickname']}!</h1>
+                    <div class='col-sm-6'>
+                        
+                    </div>
+                    <div class='col-sm-6 text-left'>
                     <p>Vārds: {$row['firstname']}</p>
                     <p>Uzvārds: {$row['lastname']}</p>
                     <p>e-pasts: {$row['email']}</p>

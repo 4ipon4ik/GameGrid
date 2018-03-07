@@ -81,7 +81,7 @@
             <p><a href="./contacts.php">Kontakti</a></p>
             <p><a href="./contactus.php">Saziņa</a></p>
         </aside>
-        <div class="col-sm-8 text-right">
+        <div class="col-sm-8">
             <?php $db->getProfile($_SESSION['nick'])?>
         </div>
         <aside class="col-sm-2">
