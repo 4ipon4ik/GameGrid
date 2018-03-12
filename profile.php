@@ -97,5 +97,14 @@
 <footer class="container-fluid">
     Artūrs Kirņickis EDP1 Inc. 2017-2018.gads
 </footer>
+<script>
+    function myf(var i){
+        var l = document.createElement("input");
+
+        var parent = document.getElementById("demo");
+        var child = document.getElementById(i);
+        parent.replaceChild(l,child);
+    }
+</script>
 </body>
 </html>

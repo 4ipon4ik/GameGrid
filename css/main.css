@@ -7,7 +7,7 @@ html {
   min-height: 100%; }
 
 body {
-  background-color: rgba(217, 60, 63, 0.47); }
+  background-color: rgba(215, 217, 216, 0.47); }
 
 li {
   list-style-type: none; }
@@ -22,10 +22,10 @@ li {
   background-color: #3dc03b;
   border: 0; }
   .navbar-inverse .navbar-nav > li > a {
-    color: #4e7f7e;
+    color: #210a07;
     font-weight: bold; }
     .navbar-inverse .navbar-nav > li > a:hover {
-      color: rgba(53, 180, 41, 0.96); }
+      color: rgba(180, 18, 14, 0.96); }
 
 iframe {
   width: 100%; }

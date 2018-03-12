@@ -54,7 +54,7 @@ class DB_class{
                     <td>
                         <form action='./usrList.php' method='post'>
                             <input type='hidden' name='delUserID' value='{$row['userID']}'/>
-                            <button type='submit' class='btn btn-primary' name='deleteUser'>Dzēst</button>
+                            <button type='submit' class='btn btn-danger' name='deleteUser'>Dzēst</button>
                         </form>
                     </td>
                 </tr>";
@@ -150,22 +150,25 @@ class DB_class{
         header("location:{$send}");
     }
     function getProfile($userID){
+        $i = 0;
         $sql = "SELECT * FROM users WHERE userID = {$userID}";
         $rs=$this->con->query($sql);
         while($row = $rs->fetch_assoc()) {
+            $i++;
             echo "<h1>Sveiks {$row['nickname']}!</h1>
                     <div class='col-sm-6'>
-                        
+                        <div><img src='./img/0_200.png' alt=''></div>
                     </div>
                     <div class='col-sm-6 text-left'>
-                    <p>Vārds: {$row['firstname']}</p>
-                    <p>Uzvārds: {$row['lastname']}</p>
-                    <p>e-pasts: {$row['email']}</p>
-                    <p>Steam profils: {$row['steamprofile']}</p>
-                    <p>Valsts: {$row['country']}</p>
-                    <p>Pilsēta: {$row['city']}</p>
-                    <p>Dzimšanas diena: {$row['birthday']}</p>
-                    <p>Tiesības: {$_SESSION['rolename']}</p>
+                    <table class='table' id='demo'>
+                    <tr><td>Vārds: </td><td id='{$i}'>{$row['firstname']}</td><td><button onclick='myf(1)' class='btn btn-default'>rediģēt</button></td></tr>
+                    <tr><td>Uzvārds: </td><td id='{$i}'>{$row['lastname']}</td><td><button onclick='myf(2)' class='btn btn-default'>rediģēt</button></td></tr>
+                    <tr><td>e-pasts: </td><td id='{$i}'>{$row['email']}</td><td><button onclick='myf(3)' class='btn btn-default'>rediģēt</button></td></tr>
+                    <tr><td>Steam profils: </td><td id='{$i}'>{$row['steamprofile']}</td><td><button onclick='myf(4)' class='btn btn-default'>rediģēt</button></td></tr>
+                    <tr><td>Valsts: </td><td id='{$i}'>{$row['country']}</td><td><button onclick='myf(5)' class='btn btn-default'>rediģēt</button></td></tr>
+                    <tr><td>Pilsēta: </td><td id='{$i}'>{$row['city']}</td><td><button onclick='myf(6)' class='btn btn-default'>rediģēt</button></td></tr>
+                    <tr><td>Dzimšanas diena: </td><td id='{$i}'>{$row['birthday']}</td><td><button onclick='myf(7)' class='btn btn-default'>rediģēt</button></td></tr>
+                    <tr><td>Tiesības: </td><td id='{$i}'>{$_SESSION['rolename']}</td><td><button onclick='myf(8)' class='btn btn-default'>rediģēt</button></td></tr></table>
                   </div>
                   ";
         }
