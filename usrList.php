@@ -74,7 +74,7 @@
             <p><a href="contactus.php">Saziņa</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <?php $db->listUsers()?>
+            <?php $db->getUsers()?>
         </div>
         <div class="col-sm-2">
             <div class="well">

@@ -129,7 +129,7 @@
                 </form>
                 <?php
                 if(isset($_POST['saveUsr'])){
-                    $db->saveUsr($_POST['nick'],$_POST['email'],md5($_POST['pwd']),$_POST['fname'],$_POST['lname'],$_POST['stm'],$_POST['cty'],$_POST['ctry'],$_POST['bthdy']);
+                    $db->setUser($_POST['nick'],$_POST['email'],md5($_POST['pwd']),$_POST['fname'],$_POST['lname'],$_POST['stm'],$_POST['cty'],$_POST['ctry'],$_POST['bthdy']);
                     echo "Dati  saglabāti";
                 }
                 ?>

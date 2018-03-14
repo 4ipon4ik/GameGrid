@@ -14,17 +14,17 @@ class DB_class{
         $this->con = new mysqli($this->server,$this->dbuser,$this->dbpw, $this->db);
         $this->con->set_charset("utf8");
     }
-    function saveMess($Name, $Mail, $Messege){
+    function setMessege($Name, $Mail, $Messege){
         $sql = "INSERT INTO messeges(fname, email, messege) VALUES('{$Name}','{$Mail}','{$Messege}')";
         $this->con->query($sql);
         echo $sql;
     }
-    function saveUsr($nick, $mail, $pass, $fname, $lname, $stm, $ctry, $cty, $bday){
+    function setUser($nick, $mail, $pass, $fname, $lname, $stm, $ctry, $cty, $bday){
         $sql = "INSERT INTO users(nickname, email, password, firstname, lastname, steamprofile, country, city, birthday) VALUES('{$nick}','{$mail}','{$pass}','{$fname}','{$lname}','{$stm}','{$ctry}','{$cty}','{$bday}')";
         $this->con->query($sql);
         echo $sql;
     }
-    function listUsers(){
+    function getUsers(){
         $i = 0;
         $sql = "SELECT userID, nickname, firstname, lastname, email FROM users";
         $rs=$this->con->query($sql);
@@ -63,7 +63,7 @@ class DB_class{
         var_dump($rs);
     }
 
-    function gamePage($id){
+    function getGamepage($id){
         $sql = "SELECT * FROM games  WHERE gameID={$id}";
         $sql2 = "SELECT c.comdate, c.content, u.nickname FROM commentaries c INNER JOIN users u ON c.userID = u.userID WHERE c.gameID={$id}";
         $rs = $this->con->query($sql);
@@ -72,15 +72,18 @@ class DB_class{
             echo "<div class='col-sm-12'>
                       <h1 class='text-center'>{$row['gname']}</h1>
                       <div class='col-sm-6'>
-                        
+                        <img src='../img/csgo.jpg' alt=''>
                       </div>
                       <div class='col-sm-6 text-left'>
-                      <table class='table'>
-                          <td>{$row['description']}</td>
-                          <td>{$row['rating']}</td>
-                          <td>{$row['releasedate']}</td>
-                          <td>{$row['platform']}</td>
-                      </table>
+                          <table class='table'>
+                              <tr><td>{$row['description']}</td></tr>
+                              <tr><td>{$row['rating']}</td></tr>
+                              <tr><td>{$row['releasedate']}</td></tr>
+                              <tr><td>{$row['platform']}</td></tr>
+                          </table>
+                          <form action='' method='post'>
+                              <button class='btn btn-primary' name='addfav'>Pievienot favorītiem</button>
+                          </form>
                       </div>
                   </div>";
         }
@@ -91,8 +94,11 @@ class DB_class{
                   </table>";
         }
     }
-
-    function editUsrForm($id){
+    function setFavorites($id,$userID){
+        $sql = "INSERT INTO favorites(userID, gameID) VALUES ({$id},{$userID})";
+        $this->con->query($sql);
+    }
+    function getEditUsrForm($id){
         $sql = "SELECT userID, firstname, lastname, email FROM users WHERE userID = {$id}";
         $rs=$this->con->query($sql);
         while($row = $rs->fetch_assoc()) {
@@ -172,5 +178,22 @@ class DB_class{
                   </div>
                   ";
         }
+    }
+    function getFavorites($id){
+        $sql = "SELECT g.gameID g.gname, g.platform, g.releasedate, g.rating FROM games g INNER JOIN favorites f ON g.gameID = f.gameID WHERE userID={$id}";
+        $rs = $this->con->query($sql);
+        echo "<div>
+                    <h1>Favorīti:</h1>
+                    <table class='table table-bordered'>
+                    <tr><th>Nosakums</th><th>Platforma</th><th>Izlaišanas gads</th><th>Reitings</th></tr>";
+        while($row = $rs->fetch_assoc()){
+            echo "<tr><td>{$row['gname']}</td><td>{$row['platform']}</td><td>{$row['releasedate']}</td><td>{$row['rating']}</td><td><form action='' method='post'><input type='hidden' value='{$row['gameID']}' name='GameID'><button class='btn btn-danger' name='delfav'>Dzēst</button></form></td></tr>";
+        }
+        echo "</table>
+                </div>";
+    }
+    function delFavorites($id){
+        $sql = "DELETE FROM favorites WHERE gameID={$id}";
+        $this->con->query($sql);
     }
 }

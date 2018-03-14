@@ -90,7 +90,7 @@
             </form>
             <?php
             if(isset($_POST['send'])){
-                    $db->saveMess($_POST['name'],$_POST['email'],$_POST['messege']);
+                    $db->setMessege($_POST['name'],$_POST['email'],$_POST['messege']);
                     echo "Dati  saglabāti";
                 }
             ?>

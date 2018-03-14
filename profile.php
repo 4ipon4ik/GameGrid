@@ -82,7 +82,11 @@
             <p><a href="./contactus.php">Saziņa</a></p>
         </aside>
         <div class="col-sm-8">
-            <?php $db->getProfile($_SESSION['nick'])?>
+            <?php $db->getProfile($_SESSION['nick']);
+            $db->getFavorites($_SESSION['nick']);
+            if(isset($_POST['delfav'])){
+                $db->delFavorites($_POST['GameID']);
+            }?>
         </div>
         <aside class="col-sm-2">
             <div class="well">

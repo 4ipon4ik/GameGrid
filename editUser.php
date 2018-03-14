@@ -80,7 +80,7 @@
         </div>
         <div class="col-sm-8 text-left">
             <form action="usrList.php" method="post">
-                <?php $db->editUsrForm($_GET["user"]); ?>
+                <?php $db->getEditUsrForm($_GET["user"]); ?>
                 <button type="submit" class="btn btn-primary" name="savedata">Saglabāt</button>
             </form>
         </div>
