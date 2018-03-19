@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: artur
- * Date: 25.02.2018
- * Time: 20:14
+ * Date: 19.03.2018
+ * Time: 6:28
  */
     require_once("./classes/autoload.php");
 ?>
@@ -37,11 +37,9 @@
             <p><a href="./contactus.php">Saziņa</a></p>
         </aside>
         <div class="col-sm-8">
-            <?php $db->getProfile($_SESSION['userID']);
-            $db->getFavorites($_SESSION['userID']);
-            if(isset($_POST['delfav'])){
-                $db->delFavorites($_POST['GameID']);
-            }?>
+            <?php $db->getProfileEditForm($_SESSION['userID']);
+
+            ?>
         </div>
         <aside class="col-sm-2">
             <div class="well">
