@@ -20,9 +20,21 @@
             $("#5").attr("class","active");
         });
         $(function () {
-           $(".setU").on("click",function (){
-               $(this).parent().siblings().eq(1).html("<form method='post'><input type='text'><button class='btn btn-danger' name='set'>:)</button></form>");
+           $("[name='setU']").on("click",function (){
+               var el = $(this).parent().siblings().eq(1);
+               var cont = el.text();
+               var nel = $("<input>").attr("type","text").val(cont);
+               el.html(nel);
+               $(this).attr("name","setU1").text("Saglabāt");
            });
+            $("[name='setU1']").on("click",function (){
+                var el = $(this).parent().siblings().eq(1);
+                var val = el.children().val();
+                alert(val);
+                el.children().remove();
+                el.text(val);
+                $(this).attr("name","setU");
+            });
         });
     </script>
 </head>
@@ -40,7 +52,7 @@
             <?php $db->getProfile($_SESSION['userID']);
             $db->getFavorites($_SESSION['userID']);
             if(isset($_POST['delfav'])){
-                $db->delFavorites($_POST['GameID']);
+                $db->delFavorite($_POST['GameID']);
             }?>
         </div>
         <aside class="col-sm-2">

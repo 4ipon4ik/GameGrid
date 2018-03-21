@@ -7,7 +7,7 @@ html {
   min-height: 100%; }
 
 body {
-  background-color: rgba(215, 217, 216, 0.47); }
+  background-color: rgba(20, 162, 204, 0.47); }
 
 li {
   list-style-type: none; }
@@ -19,13 +19,13 @@ li {
   max-height: 30px; }
 
 .navbar-inverse {
-  background-color: #3dc03b;
+  background-color: #098cb2;
   border: 0; }
   .navbar-inverse .navbar-nav > li > a {
-    color: #210a07;
+    color: #000000;
     font-weight: bold; }
     .navbar-inverse .navbar-nav > li > a:hover {
-      color: rgba(180, 18, 14, 0.96); }
+      color: rgba(255, 238, 25, 0.96); }
 
 iframe {
   width: 100%; }

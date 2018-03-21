@@ -24,8 +24,27 @@
         <div class="col-sm-8 text-left">
             <?php $db->getGamepage($_GET['GameID']);
             if(isset($_POST['addfav'])){
-                $db->setFavorites($_GET['GameID'],$_SESSION['nick']);
+                $db->setFavorite($_GET['GameID'],$_SESSION['userID']);
             }?>
+            <div>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" name="setC">Atstāt kommentāru</button>
+                    </div>
+                </form>
+            </div>
+            <?php
+            $i = getdate(date("U"));
+            echo "$i[mday]-$i[month]-$i[year]";
+            if(isset($_POST['setC'])){
+
+                $db->setComment($_SESSION['userID'],$_GET['GameID'],$_POST['comment'],date());
+            }?>
+            <?php $db->getComment($_GET['GameID']) ?>
         </div>
         <div class="col-sm-2">
             <div class="well">

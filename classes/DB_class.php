@@ -66,9 +66,7 @@ class DB_class{
     }
     function getGamepage($id){
         $sql = "SELECT * FROM games  WHERE gameID={$id}";
-        $sql2 = "SELECT c.comdate, c.content, u.nickname FROM commentaries c INNER JOIN users u ON c.userID = u.userID WHERE c.gameID={$id}";
         $rs = $this->con->query($sql);
-        $rs2 = $this->con->query($sql2);
         while($row = $rs->fetch_assoc()) {
             echo "<div class='col-sm-12'>
                       <h1 class='text-center'>{$row['gname']}</h1>
@@ -83,12 +81,17 @@ class DB_class{
                               <tr><td>{$row['platform']}</td></tr>
                           </table>
                           <form action='' method='post'>
+                              <input type='hidden' value='1'>
                               <button class='btn btn-primary' name='addfav'>Pievienot favorītiem</button>
                           </form>
                       </div>
                   </div>";
         }
-        while($row = $rs2->fetch_assoc()) {
+    }
+    function getComment($id){
+        $sql = "SELECT c.comdate, c.content, u.nickname FROM commentaries c INNER JOIN users u ON c.userID = u.userID WHERE c.gameID={$id}";
+        $rs = $this->con->query($sql);
+        while($row = $rs->fetch_assoc()) {
             echo "<table class='table table-bordered comment'>
                       <head><th>{$row['nickname']}</th><th class='text-right'>{$row['comdate']}</th></head>
                       <tr><td colspan='2'>{$row['content']}</td></tr>
@@ -183,13 +186,13 @@ class DB_class{
                     </div>
                     <div class='col-sm-6 text-left'>
                         <table class='table profile' id='demo'>
-                            <tr><td>Vārds: </td><td>{$row['firstname']}</td><td><button class='btn btn-warning setU'>rediģēt</button></td></tr>
-                            <tr><td>Uzvārds: </td><td>{$row['lastname']}</td><td><button class='btn btn-warning setU'>rediģēt</button></td></tr>
-                            <tr><td>e-pasts: </td><td>{$row['email']}</td><td><button class='btn btn-warning setU'>rediģēt</button></td></tr>
-                            <tr><td>Steam profils: </td><td>{$row['steamprofile']}</td><td><button class='btn btn-warning setU'>rediģēt</button></td></tr>
-                            <tr><td>Valsts: </td><td>{$row['country']}</td><td><button class='btn btn-warning setU'>rediģēt</button></td></tr>
-                            <tr><td>Pilsēta: </td><td>{$row['city']}</td><td><button class='btn btn-warning setU'>rediģēt</button></td></tr>
-                            <tr><td>Dzimšanas diena: </td><td>{$row['birthday']}</td><td><button class='btn btn-warning setU'>rediģēt</button></td></tr>
+                            <tr><td>Vārds: </td><td>{$row['firstname']}</td><td><button class='btn btn-warning' name='setU'>rediģēt</button></td></tr>
+                            <tr><td>Uzvārds: </td><td>{$row['lastname']}</td><td><button class='btn btn-warning' name='setU'>rediģēt</button></td></tr>
+                            <tr><td>e-pasts: </td><td>{$row['email']}</td><td><button class='btn btn-warning' name='setU'>rediģēt</button></td></tr>
+                            <tr><td>Steam profils: </td><td>{$row['steamprofile']}</td><td><button class='btn btn-warning' name='setU'>rediģēt</button></td></tr>
+                            <tr><td>Valsts: </td><td>{$row['country']}</td><td><button class='btn btn-warning' name='setU'>rediģēt</button></td></tr>
+                            <tr><td>Pilsēta: </td><td>{$row['city']}</td><td><button class='btn btn-warning' name='setU'>rediģēt</button></td></tr>
+                            <tr><td>Dzimšanas diena: </td><td>{$row['birthday']}</td><td><button class='btn btn-warning' name='setU'>rediģēt</button></td></tr>
                             <tr><td>Tiesības: </td><td>{$_SESSION['rolename']}</td><td></td></tr>
                             <tr><td colspan='3'><a href='./editProfile.php?user={$_SESSION['userID']}'>Labot</a></td><td></td><td></td></tr></table>
                     </div>";
@@ -211,15 +214,18 @@ class DB_class{
     function setMessege($Name, $Mail, $Messege){
         $sql = "INSERT INTO messeges(fname, email, messege) VALUES('{$Name}','{$Mail}','{$Messege}')";
         $this->con->query($sql);
-        echo $sql;
+    }
+    function setComment($userID, $gameID, $content, $comdate){
+        $sql = "INSERT INTO commentaries(userID, gameID, content, comdate) VALUES ('{$userID}','{$gameID}','{$content}','{$comdate}')";
+        $this->con->query($sql);
     }
     function setUser($nick, $mail, $pass, $fname, $lname, $stm, $ctry, $cty, $bday){
         $sql = "INSERT INTO users(nickname, email, password, firstname, lastname, steamprofile, country, city, birthday) VALUES('{$nick}','{$mail}','{$pass}','{$fname}','{$lname}','{$stm}','{$ctry}','{$cty}','{$bday}')";
         $this->con->query($sql);
         echo $sql;
     }
-    function setFavorites($id,$userID){
-        $sql = "INSERT INTO favorites(userID, gameID) VALUES ({$id},{$userID})";
+    function setFavorite($id, $userID){
+        $sql = "INSERT INTO favorites(userID, gameID) VALUES ({$userID},{$id})";
         $this->con->query($sql);
     }
     function editUsr($fname, $lname, $mail, $ID){
@@ -230,7 +236,7 @@ class DB_class{
         $sql = "DELETE FROM users WHERE userID='{$ID}'";
         $this->con->query($sql);
     }
-    function delFavorites($id){
+    function delFavorite($id){
         $sql = "DELETE FROM favorites WHERE gameID={$id}";
         $this->con->query($sql);
     }
