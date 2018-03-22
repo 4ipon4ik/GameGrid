@@ -38,13 +38,11 @@
                 </form>
             </div>
             <?php
-            $i = getdate(date("U"));
-            echo "$i[mday]-$i[month]-$i[year]";
-            if(isset($_POST['setC'])){
-
-                $db->setComment($_SESSION['userID'],$_GET['GameID'],$_POST['comment'],date());
-            }?>
-            <?php $db->getComment($_GET['GameID']) ?>
+                if(isset($_POST['setC'])){
+                    $db->setComment($_SESSION['userID'],$_GET['GameID'],$_POST['comment'],date("y-m-d H:i:s",time()));
+                }
+                $db->getComment($_GET['GameID'])
+            ?>
         </div>
         <div class="col-sm-2">
             <div class="well">

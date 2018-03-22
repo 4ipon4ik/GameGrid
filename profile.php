@@ -35,6 +35,9 @@
                 el.text(val);
                 $(this).attr("name","setU");
             });
+            $("[name='delfav'").on("click",function () {
+                $("#fav").slideToggle(500);
+            })
         });
     </script>
 </head>

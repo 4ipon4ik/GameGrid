@@ -38,7 +38,9 @@
         </aside>
         <div class="col-sm-8">
             <?php $db->getProfileEditForm($_SESSION['userID']);
-
+                if(isset($_POST['saveData'])){
+                    $db->editProfile($_SESSION['userID'], $_POST['mail'], $_POST['fname'],$_POST['lname'], $_POST['steam'],$_POST['ctry'], $_POST['cty'],$_POST['bday']);
+                }
             ?>
         </div>
         <aside class="col-sm-2">

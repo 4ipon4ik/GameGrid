@@ -14,6 +14,9 @@ class DB_class{
         $this->con = new mysqli($this->server,$this->dbuser,$this->dbpw, $this->db);
         $this->con->set_charset("utf8");
     }
+    function redirect($send){
+        echo "<meta http-equiv=\"refresh\" content=\"0;URL={$send}\">";
+    }
     function header($send){
         header("location:{$send}");
     }
@@ -25,6 +28,9 @@ class DB_class{
             session_destroy();
             $this->header('index.php');
         }
+    }
+    function getGames(){
+
     }
     function getUsers(){
         $i = 0;
@@ -138,21 +144,20 @@ class DB_class{
                         </div>
                         <div class='form-group'>
                             <label for='4'>Steam profils:</label>
-                            <input id='4' type='email' name='mail' value='{$row['steamprofile']}'  class='form-control'/>
+                            <input id='4' type='text' name='steam' value='{$row['steamprofile']}'  class='form-control'/>
                         </div>
                         <div class='form-group'>
                             <label for='5'>Valsts:</label>
-                            <input id='5' type='email' name='mail' value='{$row['country']}'  class='form-control'/>
+                            <input id='5' type='text' name='ctry' value='{$row['country']}'  class='form-control'/>
                         </div>
                         <div class='form-group'>
                             <label for='6'>Pilsēta:</label>
-                            <input id='6' type='email' name='mail' value='{$row['city']}'  class='form-control'/>
+                            <input id='6' type='text' name='cty' value='{$row['city']}'  class='form-control'/>
                         </div>
                         <div class='form-group'>
                             <label for='7'>Dzimšanas diena:</label>
-                            <input id='7' type='email' name='mail' value='{$row['birthday']}'  class='form-control'/>
+                            <input id='7' type='date' name='bday' value='{$row['birthday']}'  class='form-control'/>
                         </div>
-                        <input type='hidden' name='userID' value='{$row['userID']}'/>
                         <button class='btn btn-primary' name='saveData'>Saglabāt</button>
                     </form>
                 ";
@@ -168,7 +173,7 @@ class DB_class{
                 $_SESSION['role']=$row['roleID'];
                 $_SESSION['rolename']=$row['rolename'];
             }
-            $this->header('usrList.php');
+            $this->redirect('index.php');
         }
         else{
             echo "Nepareizs lietotājs vai parole";
@@ -201,15 +206,20 @@ class DB_class{
     function getFavorites($id){
         $sql = "SELECT g.gameID, g.gname, g.platform, g.releasedate, g.rating FROM games g INNER JOIN favorites f ON g.gameID = f.gameID WHERE userID={$id}";
         $rs = $this->con->query($sql);
-        echo "<div>
-                    <h1>Favorīti:</h1>
-                    <table class='table table-bordered'>
-                    <tr><th>Nosakums</th><th>Platforma</th><th>Izlaišanas gads</th><th>Reitings</th></tr>";
-        while($row = $rs->fetch_assoc()){
-            echo "<tr><td>{$row['gname']}</td><td>{$row['platform']}</td><td>{$row['releasedate']}</td><td>{$row['rating']}</td><td><form action='' method='post'><input type='hidden' value='{$row['gameID']}' name='GameID'><button class='btn btn-danger' name='delfav'>Dzēst</button></form></td></tr>";
+        if($rs->num_rows!==0) {
+            echo "<div>
+                        <h1>Favorīti:</h1>
+                        <table class='table table-bordered'>
+                        <tr id='fav'><th>Nosakums</th><th>Platforma</th><th>Izlaišanas gads</th><th>Reitings</th><th>Opcijas</th></tr>";
+            while ($row = $rs->fetch_assoc()) {
+                echo "<tr><td><a href='./game?GameID={$row['gameID']}'>{$row['gname']}</a></td><td>{$row['platform']}</td><td>{$row['releasedate']}</td><td>{$row['rating']}</td><td><form action='' method='post'><input type='hidden' value='{$row['gameID']}' name='GameID'><button class='btn btn-danger' name='delfav'>Dzēst</button></form></td></tr>";
+            }
+            echo "</table>
+                    </div>";
         }
-        echo "</table>
-                </div>";
+        else{
+            echo "<div><h1>Favorites empty. :D</h1></div>";
+        }
     }
     function setMessege($Name, $Mail, $Messege){
         $sql = "INSERT INTO messeges(fname, email, messege) VALUES('{$Name}','{$Mail}','{$Messege}')";
@@ -232,6 +242,10 @@ class DB_class{
         $sql = "UPDATE users set firstname = '{$fname}', lastname = '{$lname}', email = '{$mail}' WHERE  userID='{$ID}'";
         $this->con->query($sql);
     }
+    function editProfile($id, $mail, $fname, $lname, $stm, $ctry, $cty, $bday){
+        $sql = "UPDATE users set firstname = '{$fname}', lastname = '{$lname}', email = '{$mail}', steamprofile = '{$stm}', city = '{$cty}', country = '{$ctry}', birthday = '{$bday}' WHERE  userID='{$id}'";
+        $this->con->query($sql);
+    }
     function deleteUsr($ID){
         $sql = "DELETE FROM users WHERE userID='{$ID}'";
         $this->con->query($sql);
@@ -239,6 +253,6 @@ class DB_class{
     function delFavorite($id){
         $sql = "DELETE FROM favorites WHERE gameID={$id}";
         $this->con->query($sql);
+        $this->redirect("profile.php");
     }
-
 }
