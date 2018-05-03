@@ -37,7 +37,7 @@
                 <form action="registration.php" method="post">
                     <div class="form-group">
                         <label for="email">E-pasta adrese:</label>
-                        <input type="email" class="form-control" id="email" placeholder="peteris@mail.com" name="email">
+                        <input type="text" class="form-control" id="email" placeholder="peteris@mail.com" name="email">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Parole:</label>
@@ -79,8 +79,11 @@
                 </form>
                 <?php
                 if(isset($_POST['saveUsr'])){
-                    $db->setUser($_POST['nick'],$_POST['email'],md5($_POST['pwd']),$_POST['fname'],$_POST['lname'],$_POST['stm'],$_POST['cty'],$_POST['ctry'],$_POST['bthdy']);
-                    echo "Dati  saglabāti";
+                    $validation->registration($_POST['email'],$_POST['pwd'],$_POST['nick'],$_POST['fname'],$_POST['lname']);
+                    if($validation->getErr() == ""){
+                        $db->setUser($_POST['nick'], $_POST['email'], md5($_POST['pwd']), $_POST['fname'], $_POST['lname'], $_POST['stm'], $_POST['cty'], $_POST['ctry'], $_POST['bthdy']);
+                        echo "Dati  saglabāti";
+                    }
                 }
                 ?>
             </div>
