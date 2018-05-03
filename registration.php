@@ -34,17 +34,28 @@
         <div class="col-sm-8 text-left">
             <h1>Ievadi reģistrācijas datus:</h1>
             <div class="col-sm-6">
+                <div class="required">
+                    <?php
+                    if(isset($_POST['saveUsr'])){
+                        $validation->registration($_POST['email'],$_POST['pwd'],$_POST['nick'],$_POST['fname'],$_POST['lname']);
+                        if($validation->getErr() == ""){
+                            $db->setUser($_POST['nick'], $_POST['email'], md5($_POST['pwd']), $_POST['fname'], $_POST['lname'], $_POST['stm'], $_POST['cty'], $_POST['ctry'], $_POST['bthdy']);
+                        }
+                        $validation->resetErr();
+                    }
+                    ?>
+                </div>
                 <form action="registration.php" method="post">
                     <div class="form-group">
-                        <label for="email">E-pasta adrese:</label>
+                        <label for="email"><span class="required">*</span>E-pasta adrese:</label>
                         <input type="text" class="form-control" id="email" placeholder="peteris@mail.com" name="email">
                     </div>
                     <div class="form-group">
-                        <label for="pwd">Parole:</label>
+                        <label for="pwd"><span class="required">*</span>Parole:</label>
                         <input type="password" class="form-control" id="pwd" name="pwd">
                     </div>
                     <div class="form-group">
-                        <label for="nick">Sauklis:</label>
+                        <label for="nick"><span class="required">*</span>Lietotājvārds:</label>
                         <input type="text" class="form-control" id="nick" name="nick">
                     </div>
                     <div class="form-group">
@@ -75,17 +86,9 @@
                         <label for="bthdy">Dzimšanas datums:</label>
                         <input type="date" class="form-control" id="bthdy" name="bthdy">
                     </div>
+                    <div><span class="required">*</span>obligātie lauki.</div>
                     <button type="submit" class="btn btn-default" name="saveUsr">Submit</button>
                 </form>
-                <?php
-                if(isset($_POST['saveUsr'])){
-                    $validation->registration($_POST['email'],$_POST['pwd'],$_POST['nick'],$_POST['fname'],$_POST['lname']);
-                    if($validation->getErr() == ""){
-                        $db->setUser($_POST['nick'], $_POST['email'], md5($_POST['pwd']), $_POST['fname'], $_POST['lname'], $_POST['stm'], $_POST['cty'], $_POST['ctry'], $_POST['bthdy']);
-                        echo "Dati  saglabāti";
-                    }
-                }
-                ?>
             </div>
         </div>
         <div class="col-sm-2">

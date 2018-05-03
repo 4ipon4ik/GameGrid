@@ -8,20 +8,19 @@
 
 class Validation
 {
+private
+    $error ="";
 public
     function getErr(){
         return $this->error;
     }
+    function resetErr(){
+        $this->error = "";
+    }
     function registration($mail,$pass,$nick,$name,$lname){
-        if($this->isEmpty($mail)||$this->isEmpty($pass)||$this->isEmpty($nick)||$this->isEmpty($name)||$this->isEmpty($lname)){
+        if($this->isEmpty($mail)||$this->isEmpty($pass)||$this->isEmpty($nick)){
             echo $this->error,'<br>';
             return;
-        }
-        if($this->name($name)){
-            echo $this->error,'<br>';
-        }
-        if($this->lname($lname)){
-            echo $this->error,'<br>';
         }
         if($this->mail($mail)){
             echo $this->error,'<br>';
@@ -32,36 +31,33 @@ public
         if($this->nickname($nick)){
             echo $this->error,'<br>';
         }
+        if($this->name($name,'vārdu')){
+            echo $this->error,'<br>';
+        }
+        if($this->name($lname,'uzvārdu')){
+            echo $this->error,'<br>';
+        }
     }
     function isEmpty($field){
         if($field == ""){
-            $this->error = "Lūdzu aizpildiet visus laukus";
+            $this->error = "Lūdzu aizpildiet visus obligātos laukus";
             return 1;
         }
         else{
             return 0;
         }
     }
-    function name($field){
-        if(preg_match("/^[A-ZĒŪĪĀŠĶĻŅ][a-zēūīāšķļņ]*$/",$field)){
+    function name($field, $text){
+        if(preg_match("/^[A-ZĒŪĪĀŠĶĻŅ][a-zēūīāšķļņ]{2,}$/",$field)){
             return 0;
         }
-        else{
-            $this->error = "Lūdzu ierakstiet korektu vārdu.";
-            return 1;
-        }
-    }
-    function lname($field){
-        if(preg_match("/^[A-ZĒŪĪĀŠĶĻŅ][a-zēūīāšķļņ]*$/",$field)){
-            return 0;
-        }
-        else{
-            $this->error = "Lūdzu ierakstiet korektu uzvārdu.";
+        elseif(!$this->isEmpty($field)){
+            $this->error = "Lūdzu ierakstiet korektu $text vismaz 3 burtu garumā.";
             return 1;
         }
     }
     function mail($field){
-        if(preg_match("/^[a-z][\.a-z0-9]*[a-z0-9]@[a-z0-9]*\.[a-z]{2,4}$/i",$field)){
+        if(preg_match("/^[a-z][\.a-z0-9]*[a-z0-9]@[a-z0-9]*\.[a-z]{2,3}$/i",$field)){
             return 0;
         }
         else{
@@ -70,7 +66,7 @@ public
         }
     }
     function pass($field){
-        if(!preg_match("/^[.]{,5}$/",$field)){
+        if(preg_match("/^.{6,}$/",$field)){
             return 0;
         }
         else{
@@ -83,10 +79,8 @@ public
             return 0;
         }
         else{
-            $this->error = "Pirmais simbols nevar būt skaitlis. Maksimālais saukļa garums ir 10.";
+            $this->error = "Lietotājvārds pirmais simbols var būt tikai burts. Minimālais un maksimālais lietotājvārda garums ir 3/10.";
             return 1;
         }
     }
-private
-$error ="";
 }
